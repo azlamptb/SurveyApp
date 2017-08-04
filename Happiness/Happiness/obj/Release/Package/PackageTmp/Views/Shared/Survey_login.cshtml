@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{App.name} - Login</title>
+    <meta name="description" content="Happines monitoring" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+    <link rel="apple-touch-icon" href="@Url.Content("~/Content/assets/images/logo.png")">
+    <meta name="apple-mobile-web-app-title" content="Flatkit">
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="196x196" href="@Url.Content("~/Content/assets/images/logo.png")">
+
+    <!-- style -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/animate.css/animate.min.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/glyphicons/glyphicons.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/font-awesome/css/font-awesome.min.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/material-design-icons/material-design-icons.css")" type="text/css" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/bootstrap/dist/css/bootstrap.min.css")" type="text/css" />
+
+    <!-- build:css ../assets/styles/app.min.css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/styles/app.css")" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/styles/font.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/site.css")" >
+    <!-- endbuild -->
+</head>
+<body>
+    <div class="app" id="app">
+
+        <!-- ############ LAYOUT START-->
+           @RenderSection("featured", required: false)
+                <!-- / -->
+                @RenderBody()
+
+        <!-- ############ LAYOUT END-->
+
+    </div>
+    <!-- build:js scripts/app.html.js -->
+    <!-- jQuery -->
+    @Scripts.Render("~/bundles/jquery")
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="@Url.Content("~/Scripts/libs/jquery/tether/dist/js/tether.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/bootstrap/dist/js/bootstrap.js")"></script>
+    <!-- core -->
+    <script src="@Url.Content("~/Scripts/libs/jquery/underscore/underscore-min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/PACE/pace.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/script/config.lazyload.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/script/palette.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-load.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-jp.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-include.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-device.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-form.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-nav.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-screenfull.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-scroll-to.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-toggle-class.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/app.js")"></script>
+
+    <!-- ajax -->
+    @*<script src="../libs/jquery/jquery-pjax/jquery.pjax.js"></script>*@
+    <script src="@Url.Content("~/Scripts/script/ajax.js")"></script>
+
+    @RenderSection("scripts", required: false)
+    <!-- endbuild -->
+</body>
+</html>

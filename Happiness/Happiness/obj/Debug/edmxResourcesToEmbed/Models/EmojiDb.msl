@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmojidbModelStoreContainer" CdmEntityContainer="EmojidbEntities">
+    <FunctionImportMapping FunctionImportName="GetHappyindexSummary" FunctionName="EmojidbModel.Store.GetHappyindexSummary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexSummary_Result">
+          <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+          <ScalarProperty Name="counts" ColumnName="counts" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSurveyChild" FunctionName="EmojidbModel.Store.GetSurveyChild">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetSurveyChild_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answers" ColumnName="Answers" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSurveyFormail" FunctionName="EmojidbModel.Store.GetSurveyFormail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetSurveyFormail_Result">
+          <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Reporting_Authority_name" ColumnName="Reporting Authority name" />
+          <ScalarProperty Name="IsQuestion_Available" ColumnName="IsQuestion_Available" />
+          <ScalarProperty Name="Ismailenabled" ColumnName="Ismailenabled" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Emotion_id" ColumnName="Emotion_id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Emp_Reporting_Authority" ColumnName="Emp_Reporting_Authority" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReportMails" FunctionName="EmojidbModel.Store.ReportMails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.ReportMails_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+          <ScalarProperty Name="Report_Authority_Name" ColumnName="Report Authority Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tbl_survey">
+      <EntityTypeMapping TypeName="EmojidbModel.tbl_survey">
+        <MappingFragment StoreEntitySet="tbl_survey">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Modifieddate" ColumnName="Modifieddate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Mailstatus" ColumnName="Mailstatus" />
+          <ScalarProperty Name="Emotion_id" ColumnName="Emotion_id" />
+          <ScalarProperty Name="usr_id" ColumnName="usr_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetHappyindexDatewiseLinechart" FunctionName="EmojidbModel.Store.GetHappyindexDatewiseLinechart">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexDatewiseLinechart_Result">
+          <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+          <ScalarProperty Name="counts" ColumnName="counts" />
+          <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetHappyindexdetailedwithdate" FunctionName="EmojidbModel.Store.GetHappyindexdetailedwithdate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexdetailedwithdate_Result">
+          <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+          <ScalarProperty Name="counts" ColumnName="counts" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetHappyindexMonthly" FunctionName="EmojidbModel.Store.GetHappyindexMonthly">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexMonthly_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+          <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+          <ScalarProperty Name="counts" ColumnName="counts" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetQustionir" FunctionName="EmojidbModel.Store.GetQustionir">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmojidbModel.GetQustionir_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answers" ColumnName="Answers" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+          <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,4 @@
+﻿Generated model file: EmojiDb.edmx.
+Loading metadata from the database took 00:00:01.5084013.
+Generating the model took 00:00:01.9913082.
+Successfully registered the assembly 'System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.

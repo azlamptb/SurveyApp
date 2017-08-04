@@ -1,0 +1,66 @@
+﻿@model Happiness.Models.EmailConfig
+
+@{
+    ViewBag.Title = "Settings - Email Config";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h2>Email Configuration</h2>
+                    <small>Set Email Configuration</small>
+                </div>
+                <div class="box-divider m-a-0"></div>
+                <div class="box-body">
+                    @using (Html.BeginForm(new { @role = "form" }))
+                    {
+                    @Html.AntiForgeryToken()   
+                    <form role="form">
+                        <input  type="text" style="visibility:hidden" name="id" class="form-control" value="@ViewBag.id"/>  
+                        <div class="form-group">
+                            <label>SMTP hostname</label>
+                            <input  type="text" name="smtphostname" class="form-control" value="@ViewBag.smtphostname"/>      
+                            @Html.ValidationMessageFor(model => model.smtphostname)
+                        </div>  
+                        <div class="form-group">
+                            <label>SMTP Port</label>
+                           <input  type="text" name="smtpPort" class="form-control" value="@ViewBag.smtpPort"/>                            
+                            @Html.ValidationMessageFor(model => model.smtpPort)     
+                        </div>  
+                        <div class="form-group">
+                            <label></label>
+                            <div class="checkbox">
+                                <label class="ui-check ui-check-md">
+                                    @*@Html.CheckBoxFor(model => model.IsQuestion_Available, new { @id="ischckqus", @type="checkbox" })*@
+                                    <input type="checkbox" id="ischckqus" value="true" name="SSLEnabled">
+                                    <i class="dark-white"></i>
+                                    SSL Enabled
+                                </label>
+                            </div>
+                        </div>     
+                        <div class="form-group">
+                            <label>E-Mail</label>
+                            <input  type="text" name="SendEmail" class="form-control" value="@ViewBag.SendEmail"/>
+                            @Html.ValidationMessageFor(model => model.SendEmail)
+                        </div> 
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input  type="password"  name="Passowrd" class="form-control" value="@ViewBag.Passowrd"/>
+                            @Html.ValidationMessageFor(model => model.Passowrd)
+                        </div> 
+                        <button type="submit" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                        <br />
+                         @*@Html.ActionLink("Back to List", "Index", "ReportingAuthority")*@
+                        @Html.ValidationSummary()
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+}

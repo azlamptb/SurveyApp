@@ -1,0 +1,164 @@
+﻿@model Happiness.Models.emotionModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+<div class="padding">
+    <div class="row">
+        @using (Html.BeginForm(new { @action = "Create" }))
+        {
+            @Html.AntiForgeryToken()   
+            <form role="form">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-header">
+                            <h2>Create Emotion</h2>
+                            <small></small>
+                        </div>
+                        <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Emotion Name</label>
+                                @Html.TextBoxFor(model => model.EmotionName, new { @class = "form-control", @placeholder = "Emotion Name" })
+                                @Html.ValidationMessageFor(model => model.EmotionName)
+                            </div>
+                            <div class="form-group">
+                                <label>Emotion Icon</label>
+                                <input type="file" class="form-control" id="UploadImg"  />
+                                <input type="text" style="visibility: hidden;" name="EmotionIcon" id="txtImg" size="50" />
+                                @Html.ValidationMessageFor(model => model.EmotionIcon)
+                                <div class="form-group">
+                                    <img id="imgPreview" height="200" width="200" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label></label>
+                                <div class="checkbox">
+                                    <label class="ui-check ui-check-md">
+                                        @*@Html.CheckBoxFor(model => model.IsQuestion_Available, new { @id="ischckqus", @type="checkbox" })*@
+                                        <input type="checkbox" id="ischckqus" value="true" name="IsQuestion_Available">
+                                        <i class="dark-white"></i>
+                                        Questions Available
+                                    </label>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label></label>
+                                <div class="checkbox">
+                                    <label class="ui-check ui-check-md">
+                                        @*@Html.CheckBoxFor(model => model.IsQuestion_Available, new { @id="ischckqus", @type="checkbox" })*@
+                                        <input type="checkbox" value="true" name="Ismailenabled">
+                                        <i class="dark-white"></i>
+                                         Mail Enabled
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                            <br />
+                             @Html.ActionLink("Back to List", "Index","Emotion")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" id ="QusDiv" style="display:none">
+                    <div class="box">
+                        <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+                            <div>                               
+                                <input type="button" class="md-btn md-raised m-b-sm w-xs green plusbtn" value="Add"  />
+                                <input type="button" class="md-btn md-raised m-b-sm w-xs green minusbtn" value="Remove" />
+                            </div>
+                            <table id="QusTable" class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Questions</td>  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationSummary()
+            </form>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $("#UploadImg").change(function () {
+            var data = new FormData();
+            var files = $("#UploadImg").get(0).files;
+            if (files.length > 0) {
+                $file = $("#UploadImg");
+                var $filePath = $.trim($file.val());
+                if ($filePath == "") {
+                    alert("Please browse a file to upload");
+                    return;
+                }
+
+                var $ext = $filePath.split(".").pop().toLowerCase();
+                var $allow = new Array("gif", "png", "jpg", "jpeg");
+                if ($.inArray($ext, $allow) == -1) {
+                    alert("Only image files are accepted, please browse a image file");
+                    return;
+                }
+                data.append("MyImages", files[0]);
+            }
+            if (files.length > 0) {
+                $.ajax({
+                    url: '@Url.Action("UploadFile", "Emotion")',
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        //code after success
+                        $("#txtImg").val('/Upload/Emotion/' + response);
+                        $("#imgPreview").attr('src', '/Upload/Emotion/' + response);
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+
+                });
+            }
+
+            
+        });
+
+        $("body").on("change", "#ischckqus", function onChekboxChange(e) {
+            if ($("#ischckqus").is(":checked")) {
+                //show the hidden div
+                $("#QusDiv").show("fast");
+                
+            }
+            else {
+                //otherwise, hide it
+                $("#QusDiv").hide("fast");
+            }
+        });
+     
+        $("body").on("click", ".plusbtn", function onClickadd(e) {
+            var length = $("#QusTable tbody tr").length;
+            $("#QusTable tbody").append('<tr><td><input type="text" name="Emotionchild[' + length + '].Questions" class="form-control" /></td></tr>');
+        });
+
+        $("body").on("click", ".minusbtn", function onClickadd(e) {
+            if ($("#QusTable tbody tr").length != 1) {
+                $("#QusTable tbody tr:last-child").remove();
+            }
+            else {
+                alert("You cannot delete first row");
+            }
+        });
+
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

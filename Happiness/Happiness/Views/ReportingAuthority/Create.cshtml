@@ -1,0 +1,39 @@
+﻿@model Happiness.Models.ReportingAuthority
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+<div class="padding">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h2>Create Report Authority</h2>
+                    <small></small>
+                </div>
+                <div class="box-divider m-a-0"></div>
+                <div class="box-body">
+                    @using (Html.BeginForm(new { @action="Create" }))
+                    {
+    @Html.AntiForgeryToken()   
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Report Authority Name</label>
+                              @Html.TextBoxFor(model => model.Reporting_auth_name, new { @class = "form-control" ,@placeholder="Report Authority Name"})                
+                              @Html.ValidationMessageFor(model => model.Reporting_auth_name)
+                        </div>    
+                        <button type="submit" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                        <br />
+                         @Html.ActionLink("Back to List", "Index", "ReportingAuthority")
+                        @Html.ValidationSummary()
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+}

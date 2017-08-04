@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmojidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_survey">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usr_id" Type="int" Nullable="false" />
+          <Property Name="Emotion_id" Type="bigint" Nullable="false" />
+          <Property Name="Mailstatus" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Modifieddate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" />
+          <Property Name="ModifiedBy" Type="nvarchar(max)" />
+        </EntityType>
+        <Function Name="GetHappyindexDatewiseLinechart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+          <Parameter Name="reportAuth" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetHappyindexdetailedwithdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+          <Parameter Name="EmployeeCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="reportAuth" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetHappyindexMonthly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+          <Parameter Name="reportAuth" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetHappyindexSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetQustionir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+          <Parameter Name="reportAuth" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetsummaryLineChartMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetSurveyChild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSurveyFormail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ReportMails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="EmojidbModelStoreContainer">
+          <EntitySet Name="tbl_survey" EntityType="Self.tbl_survey" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmojidbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EmojidbEntities" p1:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetHappyindexSummary" ReturnType="Collection(EmojidbModel.GetHappyindexSummary_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetSurveyChild" ReturnType="Collection(EmojidbModel.GetSurveyChild_Result)" />
+          <FunctionImport Name="GetSurveyFormail" ReturnType="Collection(EmojidbModel.GetSurveyFormail_Result)" />
+          <FunctionImport Name="ReportMails" ReturnType="Collection(EmojidbModel.ReportMails_Result)" />
+          <FunctionImport Name="GetsummaryLineChartMonth">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbl_survey" EntityType="EmojidbModel.tbl_survey" />
+          <FunctionImport Name="GetHappyindexDatewiseLinechart" ReturnType="Collection(EmojidbModel.GetHappyindexDatewiseLinechart_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetHappyindexdetailedwithdate" ReturnType="Collection(EmojidbModel.GetHappyindexdetailedwithdate_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="EmployeeCode" Mode="In" Type="String" />
+            <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetHappyindexMonthly" ReturnType="Collection(EmojidbModel.GetHappyindexMonthly_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetQustionir" ReturnType="Collection(EmojidbModel.GetQustionir_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetHappyindexSummary_Result">
+          <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="counts" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSurveyChild_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Question" Nullable="true" />
+          <Property Type="String" Name="Answers" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSurveyFormail_Result">
+          <Property Type="Int64" Name="SurveyID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Reporting_Authority_name" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="IsQuestion_Available" Nullable="false" />
+          <Property Type="Boolean" Name="Ismailenabled" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int64" Name="Emotion_id" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int64" Name="Emp_Reporting_Authority" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReportMails_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="Int64" Name="Report_id" Nullable="false" />
+          <Property Type="String" Name="Report_Authority_Name" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tbl_survey">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="usr_id" Nullable="false" />
+          <Property Type="Int64" Name="Emotion_id" Nullable="false" />
+          <Property Type="Boolean" Name="Mailstatus" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+          <Property Type="DateTime" Name="Modifieddate" Precision="3" />
+          <Property Type="String" Name="CreatedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ModifiedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="GetHappyindexDatewiseLinechart_Result">
+          <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="counts" Nullable="true" />
+          <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetHappyindexdetailedwithdate_Result">
+          <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="counts" Nullable="true" />
+          <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetHappyindexMonthly_Result">
+          <Property Type="String" Name="Month" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="counts" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetQustionir_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="true" />
+          <Property Type="String" Name="Answers" Nullable="true" />
+          <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmojidbModelStoreContainer" CdmEntityContainer="EmojidbEntities" >
+          <FunctionImportMapping FunctionImportName="GetHappyindexSummary" FunctionName="EmojidbModel.Store.GetHappyindexSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexSummary_Result">
+                <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+                <ScalarProperty Name="counts" ColumnName="counts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSurveyChild" FunctionName="EmojidbModel.Store.GetSurveyChild">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetSurveyChild_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answers" ColumnName="Answers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSurveyFormail" FunctionName="EmojidbModel.Store.GetSurveyFormail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetSurveyFormail_Result">
+                <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Reporting_Authority_name" ColumnName="Reporting Authority name" />
+                <ScalarProperty Name="IsQuestion_Available" ColumnName="IsQuestion_Available" />
+                <ScalarProperty Name="Ismailenabled" ColumnName="Ismailenabled" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Emotion_id" ColumnName="Emotion_id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Emp_Reporting_Authority" ColumnName="Emp_Reporting_Authority" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReportMails" FunctionName="EmojidbModel.Store.ReportMails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.ReportMails_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+                <ScalarProperty Name="Report_Authority_Name" ColumnName="Report Authority Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_survey">
+            <EntityTypeMapping TypeName="EmojidbModel.tbl_survey">
+              <MappingFragment StoreEntitySet="tbl_survey">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Modifieddate" ColumnName="Modifieddate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Mailstatus" ColumnName="Mailstatus" />
+                <ScalarProperty Name="Emotion_id" ColumnName="Emotion_id" />
+                <ScalarProperty Name="usr_id" ColumnName="usr_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetHappyindexDatewiseLinechart" FunctionName="EmojidbModel.Store.GetHappyindexDatewiseLinechart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexDatewiseLinechart_Result">
+                <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+                <ScalarProperty Name="counts" ColumnName="counts" />
+                <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHappyindexdetailedwithdate" FunctionName="EmojidbModel.Store.GetHappyindexdetailedwithdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexdetailedwithdate_Result">
+                <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+                <ScalarProperty Name="counts" ColumnName="counts" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHappyindexMonthly" FunctionName="EmojidbModel.Store.GetHappyindexMonthly">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetHappyindexMonthly_Result">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+                <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+                <ScalarProperty Name="counts" ColumnName="counts" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetQustionir" FunctionName="EmojidbModel.Store.GetQustionir">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmojidbModel.GetQustionir_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answers" ColumnName="Answers" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Reporting_auth_name" ColumnName="Reporting_auth_name" />
+                <ScalarProperty Name="EmotionName" ColumnName="EmotionName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

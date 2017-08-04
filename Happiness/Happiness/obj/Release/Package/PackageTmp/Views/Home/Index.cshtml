@@ -1,0 +1,237 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+@section head
+{
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.dark.css")">
+}
+<div class="p-a white lt box-shadow">
+	<div class="row">
+		<div class="col-sm-6">
+			<h4 class="m-b-0 _300">Welcome</h4>
+			<small class="text-muted"> <strong></strong> </small>
+		</div>
+		<div class="col-sm-6 text-sm-right">
+			<div class="m-y-sm">
+				@*<span class="m-r-sm">Start manage:</span>
+				<div class="btn-group dropdown">
+		          <button class="btn white btn-sm ">Projects</button>
+		          <button class="btn white btn-sm dropdown-toggle" data-toggle="dropdown"></button>
+		          <div class="dropdown-menu dropdown-menu-scale pull-right">
+		            <a class="dropdown-item" href>Members</a>
+		            <a class="dropdown-item" href>Tasks</a>
+		            <a class="dropdown-item" href>Inbox</a>
+		            <div class="dropdown-divider"></div>
+		            <a class="dropdown-item">Profile</a>
+		          </div>
+		        </div>*@
+	        </div>
+		</div>
+	</div>
+</div>
+<div class="padding">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="box p-a">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded  accent">
+                        <i class="material-icons">&#xe24e;</i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h4 class="m-a-0 text-lg _300"><a href>@ViewBag.emotions <span class="text-sm">Emotions</span></a></h4>
+                    <small class="text-muted">.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="box p-a">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded primary">
+                        <i class="material-icons">&#xe61c;</i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h4 class="m-a-0 text-lg _300"><a href>@ViewBag.Reportingauth <span class="text-sm">Reporting Athority</span></a></h4>
+                    <small class="text-muted">.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="box p-a">
+                <div class="pull-left m-r">
+                    <span class="w-48 rounded warn">
+                        <i class="material-icons">&#xe8d3;</i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h4 class="m-a-0 text-lg _300"><a href>@ViewBag.users  <span class="text-sm">Users</span></a></h4>
+                    <small class="text-muted">    .</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                 <div class="box-header with-border">
+                    <h3 class="box-title">Happy Index</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="Areachart_div"></div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+	    <div class="col-sm-6 col-md-4">
+	        <div class="box">
+	            <div class="box-header">
+	              <h3>Emotions</h3>
+	            </div>
+	            <ul class="list no-border p-b">
+                    @foreach (Happiness.Models.Emotion emo in ViewBag.emotionsdet)
+                    {
+                        <li class="list-item">
+                            <a herf class="list-left">
+                                <span class="w-40 avatar">
+                                    <img src='@emo.EmotionIcon' alt="...">
+                                    <i class="on b-white bottom"></i>
+                                </span>
+                            </a>
+                            <div class="list-body">
+                                <div><a href>'@emo.EmotionName'</a></div>
+                                <small class="text-muted text-ellipsis">.</small>
+                            </div>
+                        </li> 
+                    }
+	              
+	             @* <li class="list-item">
+	                <a herf class="list-left">
+	                  <span class="w-40 avatar">
+		                  <img src="/Content/assets/images/a5.jpg" alt="...">
+		                  <i class="on b-white bottom"></i>
+	                  </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Mogen Polish</a></div>
+	                  <small class="text-muted text-ellipsis">Writter, Mag Editor</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                  <span class="w-40 avatar">
+		                  <img src="/Content/assets/images/a6.jpg" alt="...">
+		                  <i class="away b-white bottom"></i>
+	                  </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Joge Lucky</a></div>
+	                  <small class="text-muted text-ellipsis">Art director, Movie Cut</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                  <span class="w-40 avatar">
+		                  <img src="/Content/assets/images/a7.jpg" alt="...">
+		                  <i class="busy b-white bottom"></i>
+	                  </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Folisise Chosielie</a></div>
+	                  <small class="text-muted text-ellipsis">Musician, Player</small>
+	                </div>
+	              </li>
+	              <li class="list-item">
+	                <a herf class="list-left">
+	                	<span class="w-40 avatar success">
+		                  <span>P</span>
+		                  <i class="away b-white bottom"></i>
+		                </span>
+	                </a>
+	                <div class="list-body">
+	                  <div><a href>Peter</a></div>
+	                  <small class="text-muted text-ellipsis">Musician, Player</small>
+	                </div>
+	              </li>*@
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="col-sm-12 col-md-8">
+			<div class="box">
+               <div class="box-header with-border">
+                    <h3 class="box-title">Happy Index Detailed</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="Barchart_div"></div>
+                        </div>
+                    </div>
+                </div>	
+		  	</div>
+		</div>
+	</div>
+
+ 
+</div>
+@section Scripts {   
+        <script src="@Url.Content("~/Scripts/libs/jquery/chartjs/dashboard2.js")"></script>
+  @*<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>*@
+    @*<script type="text/javascript" src="https://www.google.com/jsapi"></script>*@
+     <script src="@Url.Content("~/Scripts/libs/js/moment/Jsap.js")"></script>
+
+    @*<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>*@
+   @* <script src="@Url.Content("~/Scripts/libs/js/moment/moment.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>*@
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+    </script>
+    <script>
+     
+        //google.charts.load('current', { 'packages': ['corechart'] });
+       // google.charts.setOnLoadCallback(drawChart);
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '@Url.Action("GetsummaryLineChartMonth", "Reports")',
+            data: '{}',
+            success: function (chartsdata) {
+               // var array = JSON.parse(chartsdata);
+
+                var data = new google.visualization.DataTable(chartsdata);
+                var options = {
+                    title: '',
+                    backgroundColor: { fill: '#979A9A' },
+                    chartArea: { width: "50%", height: "70%" }
+                };
+                
+                var chart = new google.visualization.AreaChart(document.getElementById('Areachart_div'));
+                var chart1 = new google.visualization.BarChart(document.getElementById('Barchart_div'));
+                chart.draw(data, options);
+                chart1.draw(data, options);
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
+
+
+        $(function () {
+            $('#frmdate').datetimepicker({ format: "DD/MM/YYYY" });
+            $('#todate').datetimepicker({ format: "DD/MM/YYYY" });
+        });
+    </script>
+    
+   
+    @Scripts.Render("~/bundles/jqueryval")
+    }

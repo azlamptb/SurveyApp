@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmojidbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EmojidbEntities" p1:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetHappyindexSummary" ReturnType="Collection(EmojidbModel.GetHappyindexSummary_Result)">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetSurveyChild" ReturnType="Collection(EmojidbModel.GetSurveyChild_Result)" />
+    <FunctionImport Name="GetSurveyFormail" ReturnType="Collection(EmojidbModel.GetSurveyFormail_Result)" />
+    <FunctionImport Name="ReportMails" ReturnType="Collection(EmojidbModel.ReportMails_Result)" />
+    <FunctionImport Name="GetsummaryLineChartMonth">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="tbl_survey" EntityType="EmojidbModel.tbl_survey" />
+    <FunctionImport Name="GetHappyindexDatewiseLinechart" ReturnType="Collection(EmojidbModel.GetHappyindexDatewiseLinechart_Result)">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+      <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetHappyindexdetailedwithdate" ReturnType="Collection(EmojidbModel.GetHappyindexdetailedwithdate_Result)">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+      <Parameter Name="EmployeeCode" Mode="In" Type="String" />
+      <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetHappyindexMonthly" ReturnType="Collection(EmojidbModel.GetHappyindexMonthly_Result)">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+      <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetQustionir" ReturnType="Collection(EmojidbModel.GetQustionir_Result)">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+      <Parameter Name="reportAuth" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetHappyindexSummary_Result">
+    <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="counts" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetSurveyChild_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="true" />
+    <Property Type="String" Name="Question" Nullable="true" />
+    <Property Type="String" Name="Answers" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetSurveyFormail_Result">
+    <Property Type="Int64" Name="SurveyID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="true" />
+    <Property Type="String" Name="Reporting_Authority_name" Nullable="false" MaxLength="20" />
+    <Property Type="Boolean" Name="IsQuestion_Available" Nullable="false" />
+    <Property Type="Boolean" Name="Ismailenabled" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" />
+    <Property Type="Int64" Name="Emotion_id" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="Emp_Reporting_Authority" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ReportMails_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="Int64" Name="Report_id" Nullable="false" />
+    <Property Type="String" Name="Report_Authority_Name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="tbl_survey">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="usr_id" Nullable="false" />
+    <Property Type="Int64" Name="Emotion_id" Nullable="false" />
+    <Property Type="Boolean" Name="Mailstatus" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="DateTime" Name="Modifieddate" Precision="3" />
+    <Property Type="String" Name="CreatedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ModifiedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="GetHappyindexDatewiseLinechart_Result">
+    <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="counts" Nullable="true" />
+    <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetHappyindexdetailedwithdate_Result">
+    <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="counts" Nullable="true" />
+    <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="GetHappyindexMonthly_Result">
+    <Property Type="String" Name="Month" Nullable="true" MaxLength="3" />
+    <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="counts" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetQustionir_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="true" />
+    <Property Type="String" Name="Answers" Nullable="true" />
+    <Property Type="String" Name="EmployeeCode" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Reporting_auth_name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmotionName" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

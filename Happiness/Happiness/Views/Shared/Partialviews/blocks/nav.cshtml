@@ -1,0 +1,119 @@
+@using System.Web.Mvc.Html
+
+<ul class="nav" ui-nav>
+    <li class="nav-header hidden-folded">
+        <small class="text-muted">Main</small>
+    </li>
+
+    @* <li ui-sref-active="active">
+      <a href="#" ui-sref="app.dashboard">
+        <span class="nav-icon">
+          <i class="material-icons">&#xe3fc;<span ui-include="#"></span></i>
+        </span>
+        <span class="nav-text">Dashboard</span>
+      </a>
+    </li>*@
+
+    <li >
+        @*@Ajax.ActionLink("Reporting Authority", "../ReportingAuthority/Index", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+
+        <a href='@Url.Action("Index", "ReportingAuthority")'>
+            <span class="nav-icon">
+                <i class="material-icons">&#xe8d2;<span ui-include="'/Content/assets/images/i_3.svg'"></span></i>
+            </span>
+            <span class="nav-text">Reporting Authority</span>
+        </a>
+    </li>
+    <li >
+        <a href='@Url.Action("Index", "Account")'>
+            <span class="nav-icon">
+                <i class="material-icons">&#xe853;<span></span></i>
+            </span>
+            <span class="nav-text">Employee</span>
+        </a>
+    </li>
+    <li>
+        <a href='@Url.Action("Index", "Emotion")'>
+            <span class="nav-icon">
+                <i class="material-icons">&#xe24e;<span></span></i>
+            </span>
+            <span class="nav-text">Emotions</span>
+        </a>
+    </li>
+    <li>
+        <a href='@Url.Action("Index", "Authorityalloc")'>
+            <span class="nav-icon">
+                <i class="material-icons">&#xe8d3;<span></span></i>
+            </span>
+            <span class="nav-text">Assign Report Head</span>
+        </a>
+    </li>
+    <li ng-class="{active:$state.includes('app.layout')}">
+      <a>
+        <span class="nav-caret">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <span class="nav-icon">
+          <i class="material-icons">&#xe862;<span ui-include="'/Content/assets/images/i_2.svg'"></span></i>
+        </span>
+        <span class="nav-text">Reports</span>
+      </a>
+        <ul class="nav-sub">
+            <li>
+                @*@Ajax.ActionLink("Summary Report", "../Reports/SummaryReport", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+                <a href="@Url.Action("SummaryReport", "Reports")" ui-sref="app.layout.header"><span class="nav-text">Summary Report</span></a>
+            </li>
+            <li>
+                @*@Ajax.ActionLink("Summary Report", "../Reports/SummaryReport", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+                <a href="@Url.Action("#", "Reports")" ui-sref="app.layout.header"><span class="nav-text">Daily Happy index</span></a>
+            </li>
+            <li>
+                @*@Ajax.ActionLink("Summary Report", "../Reports/SummaryReport", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+                <a href="@Url.Action("#", "Reports")" ui-sref="app.layout.header"><span class="nav-text">Daily Happy index Grouped</span></a>
+            </li>
+            <li>
+                @*@Ajax.ActionLink("Summary Report", "../Reports/SummaryReport", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+                <a href="@Url.Action("#", "Reports")" ui-sref="app.layout.header"><span class="nav-text">Happy index Detailed</span></a>
+            </li>
+            <li>
+                @*@Ajax.ActionLink("Summary Report", "../Reports/SummaryReport", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+                <a href="@Url.Action("#", "Reports")" ui-sref="app.layout.header"><span class="nav-text">Happy index Monthly</span></a>
+            </li>
+            <li>
+                @*@Ajax.ActionLink("Summary Report", "../Reports/SummaryReport", new AjaxOptions {  UpdateTargetId="view", HttpMethod="GET" })*@
+                <a href="@Url.Action("#", "Reports")" ui-sref="app.layout.header"><span class="nav-text">Questionnaire Details</span></a>
+            </li>
+        </ul>
+    </li>
+    <li ng-class="{active:$state.includes('app.layout')}">
+        <a>
+            <span class="nav-caret">
+                <i class="fa fa-caret-down"></i>
+            </span>
+            <span class="nav-icon">
+                <i class="material-icons">&#xe429;<span ui-include="'/Content/assets/images/i_4.svg'"></span></i>
+            </span>
+            <span class="nav-text">Settings</span>
+        </a>
+        <ul class="nav-sub" id="Settingssub">
+            <li ui-sref-active="active">
+                <a href="@Url.Action("EmailConfig", "Settings")" ui-sref="app.layout.header"><span class="nav-text">Email Configuration</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a href="@Url.Action("Manage", "Account")" ui-sref="app.layout.header"><span class="nav-text">Manage Account</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a href="@Url.Action("Company", "Settings")" ui-sref="app.layout.header"><span class="nav-text">Company Registration</span></a>
+            </li>
+            @if(Roles.IsUserInRole("admin"))
+            {
+            <li ui-sref-active="active">
+                <a href="@Url.Action("RoleIndex", "Account")" ui-sref="app.layout.header"><span class="nav-text">Manage Roles</span></a>
+            </li>
+            }
+        </ul>
+    </li>
+</ul>
+@section Scripts {
+        
+}

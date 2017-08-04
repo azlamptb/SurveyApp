@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "CreateRoles";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h2>Create Report Authority</h2>
+                    <small></small>
+                </div>
+                <div class="box-divider m-a-0"></div>
+                <div class="box-body">
+                    @using (Html.BeginForm(new { @action = "CreateRoles" }))
+                    {
+    @Html.AntiForgeryToken()   
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Role Name</label>
+                            <input class="form-control" name="RoleName" placeholder="Enter RoleName" />
+                            @Html.ValidationMessage("RoleName")    
+                        </div>    
+                        <button type="submit" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                        <br />
+                         @Html.ActionLink("Back to List", "RoleIndex", "Account")
+                        @Html.ValidationSummary()
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "SummaryReport";
+    //Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_SurveyLayout.cshtml";
+   
+}
+@section head
+{
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.dark.css")">
+}
+<div class="padding">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h2>Summary Report</h2>
+                    <small></small>
+                </div>
+                <div class="box-divider m-a-0"></div>
+                <div class="box-body">
+                    <div class="form-group">
+                         <label>From Date</label>
+                        <div class='input-group date' id='frmdate'>
+                            <input id="fdate" type='text' class="form-control" />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>To Date</label>
+                        <div class='input-group date' id='todate'>
+                            <input id="tdate" type='text' class="form-control" />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <button id="Rgenerate" type="button" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @* <div class="box-header">
+                    <h2>Summary Report</h2>
+                    <small></small>
+                </div>*@
+                <div class="box-divider m-a-0"></div>
+                <div class="box-body">
+                    <div id="buttons"></div>
+                    <div class="form-group" id="JSFiddle">
+                        <div id="chartdiv" style="margin-top: 20px;margin-right:20px">
+                        </div>
+                        <div id="toolbar_div"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @*<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>*@
+ 
+    <script src="@Url.Content("~/Scripts/libs/js/moment/Jsap.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/js/moment/xepOnline.jqPlugin.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/js/moment/moment.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+    </script>
+    <script>
+
+        function AddNamespaceHandler() {
+            var svg = jQuery('#chartdiv svg');
+            svg.attr("xmlns", "http://www.w3.org/2000/svg");
+            svg.css('overflow', 'visible');
+        }
+
+        $("#Rgenerate").one('click', function () {
+            var click = "return xepOnline.Formatter.Format('JSFiddle', {render:'download', srctype:'svg'})";
+            jQuery('#buttons').append('<button class="md-btn md-raised m-b-sm w-xs orange" onclick="' + click + '"><span class="glyphicon glyphicon-save"></span>PDF</button>');
+        });
+        $('#Rgenerate').on("click", function () {
+            var Fromdate = $('#fdate').val();
+            var Todate = $('#tdate').val();
+            var obj = { Fromdate: Fromdate, Todate: Todate };
+            AddNamespaceHandler();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("GetHappyIndexSummary", "Reports")',
+            data: JSON.stringify(obj),
+            success: function (chartsdata) {
+
+                // Callback that creates and populates a data table,    
+                // instantiates the pie chart, passes in the data and    
+                // draws it.    
+
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'EmotionName');
+                data.addColumn('number', 'counts');
+
+                for (var i = 0; i < chartsdata.length; i++) {
+                    data.addRow([chartsdata[i].EmotionName, chartsdata[i].counts]);
+                }
+
+                // Instantiate and draw our chart, passing in some options    
+                var chart = new google.visualization.PieChart(document.getElementById('chartdiv'));
+                google.visualization.events.addListener(chart, 'ready', AddNamespaceHandler); 
+                //chart.draw(data, options);
+            
+                chart.draw(data,
+                  {
+                      title: "",
+                      position: "top",
+                      fontsize: "50px",
+                      chartArea: { width: '80%', height: '75%' },
+                      height: "500",
+                      width: "100%",
+                      backgroundColor: '#979A9A',
+                      is3D: true,
+                      color: 'red'
+                  });
+              //  drawToolbar(data);
+
+            },
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+            });     
+            //google.charts.setOnLoadCallback(draw);
+        });
+
+
+       
+        $(function () {
+            $('#frmdate').datetimepicker({ format: "DD/MM/YYYY" });
+            $('#todate').datetimepicker({ format: "DD/MM/YYYY" });
+        });
+    </script>
+    
+   
+    @Scripts.Render("~/bundles/jqueryval")
+}

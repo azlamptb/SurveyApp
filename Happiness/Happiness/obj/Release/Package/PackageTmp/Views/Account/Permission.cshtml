@@ -1,0 +1,98 @@
+﻿@model IList<Happiness.Models.Permission>
+@{
+    ViewBag.Title = "Permission";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+<div class="p-a white lt box-shadow">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4 class="m-b-0 _300">Manage Role</h4>
+            <a name="RoleName" class="text-muted">Role Name : @ViewBag.RoleName</a>
+        </div>
+    </div>
+</div>
+<div class="padding">
+    <div class="box">
+        @*<div class="box-header">
+            <div class="box-header">  
+                <a href="/Account/CreateRoles" class="btn btn-lg black">
+                    <span class="pull-left m-r-sm">
+                        <i class="fa fa-users fa-2x"></i>
+                    </span>
+                    <span class="clear text-left l-h-1x">
+                        <span class="text-muted text-xs">Add</span>
+                        <b class="text-md block m-b-xs">Roles</b>
+                    </span>
+                </a>
+                <a href="/Account/CreateRoles" class="btn btn-lg black">
+                    <span class="pull-left m-r-sm">
+                        <i class="fa fa-users fa-2x"></i>
+                    </span>
+                    <span class="clear text-left l-h-1x">
+                        <span class="text-muted text-xs">Add</span>
+                        <b class="text-md block m-b-xs">Roles</b>
+                    </span>
+                </a>              
+            </div>
+        </div>*@
+        <div class="table-responsive" name="tblpermission">
+            @using (Html.BeginForm(new { @action = "Permission" }))
+            {
+                @Html.AntiForgeryToken()   
+                <form role="form">
+                    <table id="example1" class="table table-striped b-t b-b">
+                        <thead>
+                            <tr>
+                                <th>Form Name</th>
+                                <th>Permission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i=0;}
+                            @foreach (var permission in Model)
+                            {
+                                <tr>
+                                    <td><input type="text" value="@permission.MenuName" class="form-control" style="border:none" readonly="true" name="Permission[@i].MenuName"  /></td>
+                                    <td>
+                                        <div class="checkbox">
+                                            <label class="ui-check ui-check-md">
+                                                @if (permission.permission ==true)
+                                                {
+                                                <input type="checkbox" checked="checked" id="ischckqus" value="true" name="Permission[@i].permission">
+                                                }
+                                                else
+                                                {
+                                                  <input type="checkbox" id="ischckqus" value="true" name="Permission[@i].permission">
+                                                }
+                                                <i class="dark-white"></i>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td style="display:none">
+                                        <input type="text" value="@permission.rolName" readonly="true" name="Permission[@i].rolName"  />                
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                    <button style="margin-left:50px;width:auto" type="submit" class="md-btn md-raised m-b-sm w-xs orange">Apply Permissions</button>
+                    <br />
+                    @Html.ActionLink("Back to List", "RoleIndex", "Account", new { @style="margin-left:50px"})
+                </form>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <!-- DataTables -->
+    @*<script src="../Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/plugins/datatables/dataTables.bootstrap.min.js"></script>*@
+
+    <script>
+        //$(document).ready(function () {
+        $('#example1').dataTable();
+    </script>
+
+}

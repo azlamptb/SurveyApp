@@ -1,0 +1,227 @@
+﻿@using System.Web.Mvc.Html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{App.name} - @ViewBag.Title</title>
+    <meta name="description" content="Happiness Monitoring" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+    <link rel="apple-touch-icon" href="@Url.Content("~/Content/assets/images/logo.png")">
+    <meta name="apple-mobile-web-app-title" content="Flatkit">
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="196x196" href="@Url.Content("~/Content/assets/images/logo.png")">
+
+    <!-- style -->
+
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/select2/select2.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/animate.css/animate.min.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/glyphicons/glyphicons.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/font-awesome/css/font-awesome.min.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/material-design-icons/material-design-icons.css")" type="text/css" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/bootstrap/dist/css/bootstrap.min.css")" type="text/css" />
+    <!-- build:css ../assets/styles/app.min.css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/styles/app.css")" type="text/css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/assets/styles/font.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/site.css")" >
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/datatables/dataTables.bootstrap.css")"/>
+
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- aside -->
+        <div id="aside" class="app-aside modal fade nav-dropdown" ng-class="{'folded': app.setting.folded}">
+            <!-- fluid app aside -->
+            <div class="left navside dark dk" layout="column">
+                <div class="navbar no-radius">
+                    @Html.Partial("~/Views/Shared/Partialviews/blocks/navbar.brand.cshtml")
+                </div>
+                <div flex class="hide-scroll">
+                    <nav class="scroll nav-light">
+                        @Html.Partial("~/Views/Shared/Partialviews/blocks/nav.cshtml")
+                    </nav>
+                </div>
+                <div flex-no-shrink class="b-t">
+                    @Html.Partial("~/Views/Shared/Partialviews/blocks/aside.top.0.cshtml")
+                </div>
+            </div>
+        </div>
+        <div id="content" class="app-content box-shadow-z0" role="main">
+            <div class="app-header white box-shadow">
+                @Html.Partial("~/Views/Shared/Partialviews/blocks/header.cshtml")
+            </div>
+            <div class="app-footer" ng-class="{'hide': $state.current.data.hideFooter}">
+                @Html.Partial("~/Views/Shared/Partialviews/blocks/footer.cshtml")
+            </div>
+            <div ui-view class="app-body" id="view">
+
+                <!-- ############ PAGE START-->
+                @*<div class="p-a white lt box-shadow">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4 class="m-b-0 _300">Welcome to Flatkit</h4>
+                            <small class="text-muted">Bootstrap <strong>4</strong> Web App Kit with AngularJS</small>
+                        </div>
+                    </div>
+                </div>*@
+
+                @RenderSection("featured", required: false)
+                <!-- / -->
+                @RenderBody()
+
+            </div>
+        </div>
+        <!-- / -->
+
+        <!-- theme switcher -->
+        <div id="switcher">
+            @Html.Partial("~/Views/Shared/Partialviews/blocks/switcher.cshtml")
+            @*<div ui-include="'../views/blocks/switcher.html'"></div>*@
+        </div>
+        <!-- / -->
+
+        <!-- ############ LAYOUT END-->
+
+
+    </div>
+    <!-- build:js scripts/app.html.js -->
+    <!-- jQuery -->
+
+    @* select2:        [
+                      '/libs/jquery/select2/dist/css/select2.min.css',
+                      '/libs/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
+                      '/libs/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css',
+                      '/libs/jquery/select2/dist/js/select2.min.js'
+                    ],*@
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/select2/dist/css/select2.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/select2-bootstrap-theme/dist/select2-bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/libs/jquery/select2-bootstrap-theme/dist/select2-bootstrap.4.css")">
+
+
+  
+    
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @*@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")*@
+
+    <script src="@Url.Content("~/Scripts/libs/select2/select2.full.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/datatables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/datatables/dataTables.bootstrap.min.js")"></script>
+
+
+    @*<script src="@Url.Content("~/Scripts/libs/jquery/jquery/dist/jquery.js")"></script>*@
+    <!-- Bootstrap -->
+    <script src="@Url.Content("~/Scripts/libs/jquery/tether/dist/js/tether.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/bootstrap/dist/js/bootstrap.js")"></script>
+    <!-- core -->
+    @*<script src="@Url.Content("~/Scripts/angular.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/libs/jquery/underscore/underscore-min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/PACE/pace.min.js")"></script>
+
+
+    <script src="@Url.Content("~/Scripts/libs/jquery/flot/jquery.flot.js")"></script>
+    <script src="@Url.Content("~/Scripts//libs/jquery/flot/jquery.flot.resize.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/flot/jquery.flot.pie.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/flot.tooltip/js/jquery.flot.tooltip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/flot-spline/js/jquery.flot.spline.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js")"></script>
+
+
+    <script src="@Url.Content("~/Scripts/script/config.lazyload.js")"></script>
+ 
+    <script src="@Url.Content("~/Scripts/libs/jquery/jquery.easy-pie-chart/dist/jquery.easypiechart.fill.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/jquery/jquery.sparkline/dist/jquery.sparkline.retina.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/libs/jquery/chartjs/Chart.min.js")"></script>
+
+
+  @*  <script src="@Url.Content("~/Scripts/libs/js/echarts/build/dist/echarts-all.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/js/echarts/build/dist/theme.js")"></script>
+    <script src="@Url.Content("~/Scripts/libs/js/echarts/build/dist/jquery.echarts.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/libs/jquery/screenfull/dist/screenfull.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/script/palette.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-load.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-jp.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-include.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-device.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-form.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-nav.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-screenfull.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-scroll-to.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/ui-toggle-class.js")"></script>
+    <script src="@Url.Content("~/Scripts/script/app.js")"></script>
+
+    <!-- ajax -->
+    @*<script src="@Url.Content("~/Scripts/libs/jquery/jquery-pjax/jquery.pjax.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/script/ajax.js")"></script>
+    <!-- endbuild -->
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/Cookies.js/0.3.1/cookies.js"></script>
+
+    
+
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+
+       // var index = Cookies.get('active');
+       //// alert(index);
+       // $('.nav').find('a').removeClass('active');
+       // $(".nav").find('a').eq(index).addClass('active');
+       // $('.nav li').on('click', 'li a', function (e) {
+       //     //e.stopPropagation();
+       //     $('.nav').find('a').removeClass('active');
+       //     $(this).addClass('active');
+       //     Cookies.set('active', $('.nav a').index(this));
+       // });
+        //$('ul.nav-sub a').click(function (e) {
+        //    e.stopPropagation();
+        //})
+
+
+        //$('body').on('click', 'ul.nav-sub a', function (e) {
+        //    e.stopPropagation();
+        //});
+         
+
+       
+
+       
+        setNavigation();
+        function setNavigation() {
+            var path = window.location.pathname;
+          //  alert(path);
+            path = path.replace(/\/$/, "");
+            path = decodeURIComponent(path);
+
+            $(".nav a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('active');
+                }
+            });
+           
+
+        }
+      //  $("a[href='" + window.location.pathname + "']").parents(".hidden-ul").css("display", "block");
+        //$("nav li").on("click", function () {
+        //    $("nav li").removeClass("active");
+        //    $(this).addClass("active");
+        //});
+    </script>
+
+</body>
+</html>

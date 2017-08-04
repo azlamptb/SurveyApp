@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "ExcelUpload";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+<div class="padding">
+    <div class="row">
+       @using (Html.BeginForm("ExcelUpload", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))  
+        {
+            @Html.AntiForgeryToken()   
+            <form role="form">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h2>Upload Employees From Excel</h2>
+                            <small></small>
+                        </div>
+                        <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Upload Excel</label>
+                                <input type="file" name="UploadedFile" class="btn btn-default" />
+                            </div>
+                            <input type="submit" class="md-btn md-raised m-b-sm w-xs orange" value="Upload" />                          
+                            <br />
+                            <label>Support Only .xlsx files</label>
+                            <br />
+                            @Html.ActionLink("Back to List", "Index", "Account")
+
+
+                        </div>
+                    </div>
+                </div>
+              
+                @Html.ValidationSummary()
+            </form>
+        }
+    </div>
+</div>

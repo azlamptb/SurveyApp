@@ -1,0 +1,150 @@
+﻿@model Happiness.Models.UserProfile
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+<div class="padding">
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()   
+            <form>
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-header">
+                            <h2>Create Employees </h2>
+                            <small></small>
+                        </div>
+                        <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Employee Code</label>
+                                @Html.TextBoxFor(model => model.EmployeeCode, new { @class = "form-control", @placeholder = "Employee Code" })
+                                @Html.ValidationMessageFor(model => model.EmployeeCode)
+                            </div>
+                            <div class="form-group">
+                                <label>Employee Name</label>
+                                @Html.TextBoxFor(model => model.EmployeeName, new { @class = "form-control", @placeholder = "Employee Name" })
+                                @Html.ValidationMessageFor(model => model.EmployeeName)
+                            </div>
+                            <div class="form-group">
+                                <label>Report Authority</label>
+                                <select id="Emp_Reporting_Authority" name="Emp_Reporting_Authority" tabindex="-1" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select id="empRole" name="RoleID" tabindex="-1" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" style="width: 100%;">
+                                    @foreach (var role in ViewBag.Roles as SelectList)
+                                    {
+                                        if (@role.Text == ViewBag.roleId[0])
+                                        {
+                                            <option selected="selected">@role.Text</option>
+                                       
+                                        }
+                                        else                                      
+                                        {
+                                              <option>@role.Text</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Employee Address</label>
+                                @Html.TextBoxFor(model => model.Emp_Address, new { @class = "form-control", @placeholder = "Employee Address" })
+                                @Html.ValidationMessageFor(model => model.Emp_Address)
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                @Html.TextBoxFor(model => model.Emp_Mob, new { @class = "form-control", @placeholder = "Mobile" })
+                                @Html.ValidationMessageFor(model => model.Emp_Mob)
+                            </div>
+                            <div class="form-group">
+                                <label>Telephone</label>
+                                @Html.TextBoxFor(model => model.Emp_Tel, new { @class = "form-control", @placeholder = "Employee Telephone" })
+                                @Html.ValidationMessageFor(model => model.Emp_Tel)
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                @Html.TextBoxFor(model => model.Emp_Email, new { @class = "form-control", @placeholder = "Employee Email" })
+                                @Html.ValidationMessageFor(model => model.Emp_Email)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.UserId, new { @class = "form-control", @placeholder = "Employee Code", @style = "display:none" })
+                            </div>
+                            <div class="box-divider m-a-0" style="margin-bottom: 30px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label>Username</label>
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Username" })
+                                @Html.ValidationMessageFor(model => model.UserName)
+                            </div>
+                           @* <div class="form-group">
+                                <label>Password</label>
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
+                                @Html.ValidationMessageFor(model => model.Password)
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                            </div>*@
+                            <div class="form-group">
+                                <label></label>
+                                <button type="submit" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                                 <br />
+                                @Html.ActionLink("Back to List", "Index","Account")
+                                <br />
+                                @Html.ValidationSummary()
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <script>
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Search", "ReportingAuthority")',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, obj) {
+                    if(@ViewBag.Report_ID == obj.id)
+                    {
+                        div_data = "<option  selected='true' value=" + obj.id + ">" + obj.Reporting_auth_name + "</option>";
+                    }
+                    else
+                    {
+                        var div_data = "<option  value=" + obj.id + ">" + obj.Reporting_auth_name + "</option>";
+                    }
+                    $(div_data).appendTo('#Emp_Reporting_Authority').change();
+                });
+            }
+        });
+        $("#Emp_Reporting_Authority").select2();
+        $('#Emp_Reporting_Authority:selected').val(@ViewBag.Report_ID)
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

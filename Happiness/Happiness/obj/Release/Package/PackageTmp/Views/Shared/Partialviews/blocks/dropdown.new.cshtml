@@ -1,0 +1,18 @@
+<div class="dropdown-menu dropdown-menu-scale">
+    <a class="dropdown-item" href='@Url.Action("Index", "Emotion")' ui-sref="app.inbox.compose">
+        <span>Emotions</span>
+    </a>
+    <a class="dropdown-item" href='@Url.Action("Index", "Account")' ui-sref="app.todo">
+        <span>Reporting Authority</span>
+    </a>
+    <a class="dropdown-item" href='@Url.Action("Index", "Account")' ui-sref="app.note.list">
+        <span>Employees</span>
+        <span class="label primary m-l-xs">@ViewBag.users</span>
+    </a>
+     @if (Roles.IsUserInRole("admin"))
+     {
+         <div class="dropdown-divider"></div>
+       <a  href="@Url.Action("RoleIndex", "Account")" class="dropdown-item" ui-sref="app.contact">Roles</a>
+       
+    }
+  </div>

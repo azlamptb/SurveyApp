@@ -1,0 +1,150 @@
+﻿@model Happiness.Models.ReportAllocationModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+}
+
+<div class="padding">
+    <div class="row">
+        @using (Html.BeginForm(new { @action = "Create" }))
+        {
+            @Html.AntiForgeryToken()   
+            <form role="form">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h2>Assign Reporting Head</h2>
+                            <small></small>
+                        </div>
+                        <div class="box-divider m-a-0"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Report Authority Name</label>
+                                <select id="Emp_Reporting_Authority" name="Report_id" tabindex="-1" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" style="width: 100%;">
+                                </select>
+                                @Html.ValidationMessageFor(model => model.Report_id)
+
+                            </div>
+                            <div class="box-body">
+                                <div>
+                                    <input type="button" class="md-btn md-raised m-b-sm w-xs green plusbtn" value="Add" />
+                                    <input type="button" class="md-btn md-raised m-b-sm w-xs green minusbtn" value="Remove" />
+                                </div>
+                                <table id="QusTable" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>EmployeeName</td>
+                                            <td>Enable Email</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*<tr>
+                                            <td>
+                                                <select class="EmployeeID" name="ReportingAuthorityAllocationChild[0].EmpID" tabindex="-1" class="form-control select2" ui-jp="select2" ui-options="{theme: 'bootstrap'}" style="width: 100%;">
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <label class="ui-check ui-check-md">                                                    
+                                                        <input type="checkbox" value="true" name="ReportingAuthorityAllocationChild[0].IsMailEnabled">
+                                                        <i class="dark-white"></i>
+                                                        Enable Email
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>*@
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="submit" class="md-btn md-raised m-b-sm w-xs orange">Submit</button>
+                            <br />
+                            @Html.ActionLink("Back to List", "Index", "Authorityalloc")
+
+
+                        </div>
+                    </div>
+                </div>
+              
+                @Html.ValidationSummary()
+            </form>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+       
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Search", "ReportingAuthority")',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, obj) {
+                    var div_data = "<option  value=" + obj.id + ">" + obj.Reporting_auth_name + "</option>";
+                    $(div_data).appendTo('#Emp_Reporting_Authority').change();
+                });
+            }
+        });
+        $("#Emp_Reporting_Authority").select2();
+
+      @*  $.ajax({
+            type: "GET",
+            url: '@Url.Action("EmployeeSearch", "Authorityalloc")',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, obj) {
+                    var div_data = "<option  value=" + obj.UserId + ">" + obj.EmployeeName + "</option>";
+                    $(div_data).appendTo('.EmployeeID').change();
+                });
+            }
+        });
+
+        $(".EmployeeID").select2();*@
+
+        $("body").on("change", "#ischckqus", function onChekboxChange(e) {
+            if ($("#ischckqus").is(":checked")) {
+                //show the hidden div
+                $("#QusDiv").show("fast");
+                
+            }
+            else {
+                //otherwise, hide it
+                $("#QusDiv").hide("fast");
+            }
+        });
+     
+        $("body").on("click", ".plusbtn", function onClickadd(e) {
+            var length = $("#QusTable tbody tr").length;
+            $("#QusTable tbody").append('<tr><td><select id="EmployeeID' + length + '" name="ReportingAuthorityAllocationChild[' + length + '].EmpID" tabindex="-1" class="form-control select2" ui-jp="select2"  style="width: 100%;"></select></td><td><div class="checkbox"><label class="ui-check ui-check-md"><input type="checkbox" value="true" name="ReportingAuthorityAllocationChild[' + length + '].IsMailEnabled"><i class="dark-white"></i>Enable Email</label></div></td></tr>');
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("EmployeeSearch", "Authorityalloc")',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, obj) {
+                    var div_data = "<option  value=" + obj.UserId + ">" + obj.EmployeeName + "</option>";
+                    $(div_data).appendTo('#EmployeeID' + length).change();
+                });
+            }
+            });
+
+            $("#EmployeeID" + length).select2();
+        });
+
+        $("body").on("click", ".minusbtn", function onClickadd(e) {
+            if ($("#QusTable tbody tr").length != 1) {
+                $("#QusTable tbody tr:last-child").remove();
+            }
+            else {
+                alert("You cannot delete first row");
+            }
+        });
+
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
